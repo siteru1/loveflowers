@@ -1,122 +1,142 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lovely Flowers</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --pink: #ffb6c1;
-            --white: #ffffff;
-            --dark-pink: #ff69b4;
-            --gray: #f8f8f8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lovely Flowers</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --pink: #ffb6c1;
+        --white: #ffffff;
+        --dark-pink: #ff69b4;
+        --gray: #f8f8f8;
+        --text-dark: #333;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            background: var(--white);
-            color: #333;
-            overflow-x: hidden;
-        }
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        background: var(--white);
+        color: var(--text-dark);
+        overflow-x: hidden;
+    }
 
-        /* HEADER */
-        header { 
-            display: flex; justify-content: center; align-items: center; 
-            padding: 20px; 
-            background: var(--pink);
-            position: sticky; top: 0;
-            z-index: 1000;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--white);
-        }
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: var(--pink);
+        position: sticky;
+        top: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--white);
+    }
 
-        /* HERO SECTION */
-        .hero-section { 
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 60vh; 
-            padding: 20px 5%;
-        }
-        .hero-card { position: relative; overflow: hidden; cursor: pointer; border-radius: 12px; }
-        .hero-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .hero-card:hover img { transform: scale(1.05); }
-        .hero-label { position: absolute; bottom: 20px; left: 20px; color: var(--white); }
-        .hero-label h2 { font-size: 28px; margin-bottom: 10px; text-shadow: 1px 1px 4px #00000055; }
+    .container { padding: 40px 5%; }
 
-        .btn-pink { 
-            background: var(--dark-pink); color: var(--white); border: none; padding: 12px 20px; 
-            font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 8px; text-transform: uppercase; 
-            text-decoration: none;
-        }
-        .btn-pink:hover { background: #ff1493; }
+    .shop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+    }
 
-        /* SHOP GRID */
-        .container { padding: 40px 5%; }
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-        .product-card { cursor: pointer; text-align: center; border-radius: 12px; background: var(--gray); padding: 15px; transition: 0.3s; }
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .img-box { aspect-ratio: 3/4; overflow: hidden; border-radius: 8px; margin-bottom: 15px; }
-        .img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
-        .product-price { font-weight: 700; font-size: 18px; margin: 10px 0; }
+    .product-card {
+        background: var(--gray);
+        text-align: center;
+        border-radius: 12px;
+        padding: 15px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
 
-        @media (max-width: 768px) {
-            .hero-section { grid-template-columns: 1fr; height: auto; }
-        }
-    </style>
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .img-box {
+        aspect-ratio: 3/4;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .product-price {
+        font-weight: 700;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .btn-pink {
+        display: inline-block;
+        background: var(--dark-pink);
+        color: var(--white);
+        border: none;
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .btn-pink:hover {
+        background: #ff1493;
+    }
+
+    @media (max-width: 768px) {
+        .shop-grid { grid-template-columns: 1fr; }
+    }
+</style>
 </head>
 <body>
 
 <header>Lovely Flowers</header>
 
-<div class="hero-section">
-    <div class="hero-card" onclick="setCategory('Мужчины')">
-        <img src="https://images.prom.ua/6283339360_w640_h640_korichnevyj-sportivnyj-kostyum.jpg" alt="Мужчины">
-        <div class="hero-label">
-            <h2>Мужчины</h2>
-            <a href="https://t.me/andnst" class="btn-pink">Купить</a>
-        </div>
-    </div>
-    <div class="hero-card" onclick="setCategory('Женщины')">
-        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800" alt="Женщины">
-        <div class="hero-label">
-            <h2>Женщины</h2>
-            <a href="https://t.me/andnst" class="btn-pink">Купить</a>
-        </div>
-    </div>
-</div>
-
 <div class="container" id="shop">
     <h2 style="text-align:center; margin-bottom:40px; text-transform:uppercase;">Новая коллекция</h2>
     <div class="shop-grid" id="grid">
-        <!-- Товары будут отображаться здесь -->
+        <!-- Товары из таблицы появятся здесь -->
     </div>
 </div>
 
 <script>
-    const products = [
-        { Название: "Розовые розы", Цена: 500, Фото: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6" },
-        { Название: "Красные тюльпаны", Цена: 400, Фото: "https://images.unsplash.com/photo-1528825871115-3581a5387919" },
-        { Название: "Белые лилии", Цена: 600, Фото: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce" }
-    ];
+    const API = "https://script.google.com/macros/s/AKfycbxlDxFNIY5sMLN_M-18P92u5eKCTa2pjn-Nj0Ddj1Sa-95yA5sYyljuR7rShT1R97Cy/exec";
 
-    function render(data) {
-        document.getElementById('grid').innerHTML = data.map(p => `
+    async function load() {
+        try {
+            const res = await fetch(API);
+            const products = await res.json();
+            render(products);
+        } catch (err) {
+            console.error("Ошибка загрузки данных:", err);
+            document.getElementById('grid').innerHTML = "<p style='text-align:center; color:red;'>Не удалось загрузить товары.</p>";
+        }
+    }
+
+    function render(products) {
+        document.getElementById('grid').innerHTML = products.map(p => `
             <div class="product-card">
-                <div class="img-box"><img src="${p.Фото}" alt="${p.Название}"></div>
-                <h3>${p.Название}</h3>
-                <div class="product-price">${p.Цена} ₽</div>
-                <a href="https://t.me/andnst" class="btn-pink">Купить</a>
+                <div class="img-box"><img src="${p['Фото URL']}" alt="${p.Назва}"></div>
+                <h3>${p.Назва}</h3>
+                <div class="product-price">${p.Ціна} ₽</div>
+                <a href="https://t.me/andnst" class="btn-pink" target="_blank">Купить</a>
             </div>
         `).join('');
     }
 
-    render(products);
-
-    function setCategory(cat) {
-        // Простейшая фильтрация по категории (можно доработать)
-        alert("Переход на категорию: " + cat);
-    }
+    load();
 </script>
 
 </body>
