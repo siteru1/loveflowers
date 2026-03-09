@@ -3,227 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Flowers — Магазин цветов</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Lovely Flowers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #d44179;
-            --tg-color: #24A1DE;
-            --bg-color: #fdfafb;
+            --pink: #ffb6c1;
+            --white: #ffffff;
+            --dark-pink: #ff69b4;
+            --gray: #f8f8f8;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
+            background: var(--white);
             color: #333;
+            overflow-x: hidden;
         }
 
-        header {
-            background-color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(212, 65, 121, 0.1);
-        }
-
-        header h1 {
-            color: var(--primary-color);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.8rem;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 10px;
-        }
-
-        /* Адаптивна сітка: 2 в ряд на телефонах, 3-4 на комп'ютерах */
-        .catalog {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* По замовчуванню 2 в ряд */
-            gap: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .catalog {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 25px;
-            }
-            .container { padding: 0 20px; }
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #f0e6ea;
-        }
-
-        .card img {
-            width: 100%;
-            height: 180px; /* Трохи менша висота для мобільної версії */
-            object-fit: cover;
-        }
-
-        @media (min-width: 768px) {
-            .card img { height: 280px; }
-        }
-
-        .card-content {
-            padding: 12px;
-            text-align: center;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            font-size: 0.9rem;
+        /* HEADER */
+        header { 
+            display: flex; justify-content: center; align-items: center; 
+            padding: 20px; 
+            background: var(--pink);
+            position: sticky; top: 0;
+            z-index: 1000;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 8px;
-            min-height: 2.4em;
+            color: var(--white);
         }
 
-        .card-price {
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: 700;
+        /* HERO SECTION */
+        .hero-section { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; height: 60vh; 
+            padding: 20px 5%;
         }
+        .hero-card { position: relative; overflow: hidden; cursor: pointer; border-radius: 12px; }
+        .hero-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .hero-card:hover img { transform: scale(1.05); }
+        .hero-label { position: absolute; bottom: 20px; left: 20px; color: var(--white); }
+        .hero-label h2 { font-size: 28px; margin-bottom: 10px; text-shadow: 1px 1px 4px #00000055; }
 
-        .order-btn {
-            display: block;
-            background-color: var(--tg-color);
-            color: white;
+        .btn-pink { 
+            background: var(--dark-pink); color: var(--white); border: none; padding: 12px 20px; 
+            font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 8px; text-transform: uppercase; 
             text-decoration: none;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-top: 10px;
         }
+        .btn-pink:hover { background: #ff1493; }
 
-        /* Пагінація (Сторінки) */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 30px;
-            padding-bottom: 40px;
-        }
+        /* SHOP GRID */
+        .container { padding: 40px 5%; }
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+        .product-card { cursor: pointer; text-align: center; border-radius: 12px; background: var(--gray); padding: 15px; transition: 0.3s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .img-box { aspect-ratio: 3/4; overflow: hidden; border-radius: 8px; margin-bottom: 15px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+        .product-price { font-weight: 700; font-size: 18px; margin: 10px 0; }
 
-        .page-btn {
-            padding: 10px 15px;
-            border: 1px solid var(--primary-color);
-            background: white;
-            color: var(--primary-color);
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-
-        .page-btn.active {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .loader {
-            text-align: center;
-            padding: 50px;
-            color: var(--primary-color);
+        @media (max-width: 768px) {
+            .hero-section { grid-template-columns: 1fr; height: auto; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Love Flowers</h1>
-</header>
+<header>Lovely Flowers</header>
 
-<div class="container">
-    <div id="loader" class="loader">✿ Загрузка букетов...</div>
-    <div id="catalog" class="catalog"></div>
-    <div id="pagination" class="pagination"></div>
+<div class="hero-section">
+    <div class="hero-card" onclick="setCategory('Мужчины')">
+        <img src="https://images.prom.ua/6283339360_w640_h640_korichnevyj-sportivnyj-kostyum.jpg" alt="Мужчины">
+        <div class="hero-label">
+            <h2>Мужчины</h2>
+            <a href="https://t.me/andnst" class="btn-pink">Купить</a>
+        </div>
+    </div>
+    <div class="hero-card" onclick="setCategory('Женщины')">
+        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800" alt="Женщины">
+        <div class="hero-label">
+            <h2>Женщины</h2>
+            <a href="https://t.me/andnst" class="btn-pink">Купить</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="shop">
+    <h2 style="text-align:center; margin-bottom:40px; text-transform:uppercase;">Новая коллекция</h2>
+    <div class="shop-grid" id="grid">
+        <!-- Товары будут отображаться здесь -->
+    </div>
 </div>
 
 <script>
-    // 1. ВСТАВТЕ ВАШЕ ПОСИЛАННЯ З GOOGLE APPS SCRIPT НИЖЧЕ:
-    const API_URL = 'https://script.google.com/macros/s/AKfycbz3_DIgy6c_tMajpFwEHhPZ6p1vGO_rrl3fa_AJUZHjSfYHhGtFkKvT-DCKXkGxKbYB/exec';
-    
-    let allFlowers = [];
-    const itemsPerPage = 10;
-    let currentPage = 1;
+    const products = [
+        { Название: "Розовые розы", Цена: 500, Фото: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6" },
+        { Название: "Красные тюльпаны", Цена: 400, Фото: "https://images.unsplash.com/photo-1528825871115-3581a5387919" },
+        { Название: "Белые лилии", Цена: 600, Фото: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce" }
+    ];
 
-    async function loadData() {
-        try {
-            const response = await fetch(API_URL);
-            allFlowers = await response.json();
-            displayPage(1);
-        } catch (error) {
-            document.getElementById('loader').innerText = 'Ошибка загрузки. Проверьте настройки таблицы.';
-        }
+    function render(data) {
+        document.getElementById('grid').innerHTML = data.map(p => `
+            <div class="product-card">
+                <div class="img-box"><img src="${p.Фото}" alt="${p.Название}"></div>
+                <h3>${p.Название}</h3>
+                <div class="product-price">${p.Цена} ₽</div>
+                <a href="https://t.me/andnst" class="btn-pink">Купить</a>
+            </div>
+        `).join('');
     }
 
-    function displayPage(page) {
-        currentPage = page;
-        const catalog = document.getElementById('catalog');
-        const loader = document.getElementById('loader');
-        catalog.innerHTML = '';
-        loader.style.display = 'none';
+    render(products);
 
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const pageItems = allFlowers.slice(start, end);
-
-        pageItems.forEach(flower => {
-            if (!flower.Name) return;
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <img src="${flower.Image1}" alt="${flower.Name}" onerror="this.src='https://via.placeholder.com/200x200?text=Flowers'">
-                <div class="card-content">
-                    <div>
-                        <div class="card-title">${flower.Name}</div>
-                        <div class="card-price">${flower.Price} грн</div>
-                    </div>
-                    <a href="https://t.me/love_Flawers_menedger?text=${encodeURIComponent('Здравствуйте! Хочу заказать: ' + flower.Name)}" 
-                       target="_blank" class="order-btn">
-                       Заказать
-                    </a>
-                </div>
-            `;
-            catalog.appendChild(card);
-        });
-
-        setupPagination();
-        window.scrollTo(0, 0); // Повертаємось вгору при зміні сторінки
+    function setCategory(cat) {
+        // Простейшая фильтрация по категории (можно доработать)
+        alert("Переход на категорию: " + cat);
     }
-
-    function setupPagination() {
-        const pagination = document.getElementById('pagination');
-        pagination.innerHTML = '';
-        const pageCount = Math.ceil(allFlowers.length / itemsPerPage);
-
-        for (let i = 1; i <= pageCount; i++) {
-            const btn = document.createElement('button');
-            btn.innerText = i;
-            btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
-            btn.onclick = () => displayPage(i);
-            pagination.appendChild(btn);
-        }
-    }
-
-    loadData();
 </script>
 
 </body>
 </html>
-
 
