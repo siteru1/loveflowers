@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lovely Flowers</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --pink: #ffb6c1;
+        --white: #ffffff;
+        --dark-pink: #ff69b4;
+        --gray: #f8f8f8;
+        --text-dark: #333;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        margin: 0;
+        background: var(--white);
+        color: var(--text-dark);
+        overflow-x: hidden;
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: var(--pink);
+        position: sticky;
+        top: 0;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--white);
+    }
+
+    .container { padding: 40px 5%; }
+
+    .shop-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .product-card {
+        background: var(--gray);
+        text-align: center;
+        border-radius: 12px;
+        padding: 15px;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .img-box {
+        aspect-ratio: 3/4;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .product-price {
+        font-weight: 700;
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .btn-pink {
+        display: inline-block;
+        background: var(--dark-pink);
+        color: var(--white);
+        border: none;
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .btn-pink:hover {
+        background: #ff1493;
+    }
+
+    @media (max-width: 768px) {
+        .shop-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<header>Lovely Flowers</header>
+
+<div class="container" id="shop">
+    <h2 style="text-align:center; margin-bottom:40px; text-transform:uppercase;">Новая коллекция</h2>
+    <div class="shop-grid" id="grid">
+        <!-- Товары из таблицы появятся здесь -->
+    </div>
+</div>
+
+<script>
+    const API = "https://script.google.com/macros/s/AKfycbxlDxFNIY5sMLN_M-18P92u5eKCTa2pjn-Nj0Ddj1Sa-95yA5sYyljuR7rShT1R97Cy/exec";
+
+    async function load() {
+        try {
+            const res = await fetch(API);
+            const products = await res.json();
+            render(products);
+        } catch (err) {
+            console.error("Ошибка загрузки данных:", err);
+            document.getElementById('grid').innerHTML = "<p style='text-align:center; color:red;'>Не удалось загрузить товары.</p>";
+        }
+    }
+
+    function render(products) {
+        document.getElementById('grid').innerHTML = products.map(p => `
+            <div class="product-card">
+                <div class="img-box"><img src="${p['Фото URL']}" alt="${p.Назва}"></div>
+                <h3>${p.Назва}</h3>
+                <div class="product-price">${p.Ціна} ₽</div>
+                <a href="https://t.me/andnst" class="btn-pink" target="_blank">Купить</a>
+            </div>
+        `).join('');
+    }
+
+    load();
+</script>
+
+</body>
+</html>
