@@ -1,142 +1,226 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovely Flowers</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --pink: #ffb6c1;
-        --white: #ffffff;
-        --dark-pink: #ff69b4;
-        --gray: #f8f8f8;
-        --text-dark: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Flowers — Магазин цветов</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #d44179;
+            --tg-color: #24A1DE;
+            --bg-color: #fdfafb;
+        }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        background: var(--white);
-        color: var(--text-dark);
-        overflow-x: hidden;
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
 
-    header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        background: var(--pink);
-        position: sticky;
-        top: 0;
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--white);
-    }
+        header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(212, 65, 121, 0.1);
+        }
 
-    .container { padding: 40px 5%; }
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.8rem;
+        }
 
-    .shop-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px;
-    }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 10px;
+        }
 
-    .product-card {
-        background: var(--gray);
-        text-align: center;
-        border-radius: 12px;
-        padding: 15px;
-        transition: 0.3s;
-        cursor: pointer;
-    }
+        /* Адаптивна сітка: 2 в ряд на телефонах, 3-4 на комп'ютерах */
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* По замовчуванню 2 в ряд */
+            gap: 15px;
+        }
 
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
+        @media (min-width: 768px) {
+            .catalog {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 25px;
+            }
+            .container { padding: 0 20px; }
+        }
 
-    .img-box {
-        aspect-ratio: 3/4;
-        overflow: hidden;
-        border-radius: 8px;
-        margin-bottom: 15px;
-    }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #f0e6ea;
+        }
 
-    .img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 8px;
-    }
+        .card img {
+            width: 100%;
+            height: 180px; /* Трохи менша висота для мобільної версії */
+            object-fit: cover;
+        }
 
-    .product-price {
-        font-weight: 700;
-        font-size: 18px;
-        margin: 10px 0;
-    }
+        @media (min-width: 768px) {
+            .card img { height: 280px; }
+        }
 
-    .btn-pink {
-        display: inline-block;
-        background: var(--dark-pink);
-        color: var(--white);
-        border: none;
-        padding: 12px 20px;
-        font-size: 14px;
-        font-weight: 600;
-        border-radius: 8px;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: 0.3s;
-    }
+        .card-content {
+            padding: 12px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    .btn-pink:hover {
-        background: #ff1493;
-    }
+        .card-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            min-height: 2.4em;
+        }
 
-    @media (max-width: 768px) {
-        .shop-grid { grid-template-columns: 1fr; }
-    }
-</style>
+        .card-price {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .order-btn {
+            display: block;
+            background-color: var(--tg-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* Пагінація (Сторінки) */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            padding-bottom: 40px;
+        }
+
+        .page-btn {
+            padding: 10px 15px;
+            border: 1px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 50px;
+            color: var(--primary-color);
+        }
+    </style>
 </head>
 <body>
 
-<header>Lovely Flowers</header>
+<header>
+    <h1>Love Flowers</h1>
+</header>
 
-<div class="container" id="shop">
-    <h2 style="text-align:center; margin-bottom:40px; text-transform:uppercase;">Новая коллекция</h2>
-    <div class="shop-grid" id="grid">
-        <!-- Товары из таблицы появятся здесь -->
-    </div>
+<div class="container">
+    <div id="loader" class="loader">✿ Загрузка букетов...</div>
+    <div id="catalog" class="catalog"></div>
+    <div id="pagination" class="pagination"></div>
 </div>
 
 <script>
-    const API = "https://script.google.com/macros/s/AKfycbxlDxFNIY5sMLN_M-18P92u5eKCTa2pjn-Nj0Ddj1Sa-95yA5sYyljuR7rShT1R97Cy/exec";
+    // 1. ВСТАВТЕ ВАШЕ ПОСИЛАННЯ З GOOGLE APPS SCRIPT НИЖЧЕ:
+    const API_URL = 'ВАШЕ_ПОСИЛАННЯ_З_DEPLOY_ТУТ';
+    
+    let allFlowers = [];
+    const itemsPerPage = 10;
+    let currentPage = 1;
 
-    async function load() {
+    async function loadData() {
         try {
-            const res = await fetch(API);
-            const products = await res.json();
-            render(products);
-        } catch (err) {
-            console.error("Ошибка загрузки данных:", err);
-            document.getElementById('grid').innerHTML = "<p style='text-align:center; color:red;'>Не удалось загрузить товары.</p>";
+            const response = await fetch(API_URL);
+            allFlowers = await response.json();
+            displayPage(1);
+        } catch (error) {
+            document.getElementById('loader').innerText = 'Ошибка загрузки. Проверьте настройки таблицы.';
         }
     }
 
-    function render(products) {
-        document.getElementById('grid').innerHTML = products.map(p => `
-            <div class="product-card">
-                <div class="img-box"><img src="${p['Фото URL']}" alt="${p.Назва}"></div>
-                <h3>${p.Назва}</h3>
-                <div class="product-price">${p.Ціна} ₽</div>
-                <a href="https://t.me/andnst" class="btn-pink" target="_blank">Купить</a>
-            </div>
-        `).join('');
+    function displayPage(page) {
+        currentPage = page;
+        const catalog = document.getElementById('catalog');
+        const loader = document.getElementById('loader');
+        catalog.innerHTML = '';
+        loader.style.display = 'none';
+
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageItems = allFlowers.slice(start, end);
+
+        pageItems.forEach(flower => {
+            if (!flower.Name) return;
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${flower.Image1}" alt="${flower.Name}" onerror="this.src='https://via.placeholder.com/200x200?text=Flowers'">
+                <div class="card-content">
+                    <div>
+                        <div class="card-title">${flower.Name}</div>
+                        <div class="card-price">${flower.Price} грн</div>
+                    </div>
+                    <a href="https://t.me/love_Flawers_menedger?text=${encodeURIComponent('Здравствуйте! Хочу заказать: ' + flower.Name)}" 
+                       target="_blank" class="order-btn">
+                       Заказать
+                    </a>
+                </div>
+            `;
+            catalog.appendChild(card);
+        });
+
+        setupPagination();
+        window.scrollTo(0, 0); // Повертаємось вгору при зміні сторінки
     }
 
-    load();
+    function setupPagination() {
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+        const pageCount = Math.ceil(allFlowers.length / itemsPerPage);
+
+        for (let i = 1; i <= pageCount; i++) {
+            const btn = document.createElement('button');
+            btn.innerText = i;
+            btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+            btn.onclick = () => displayPage(i);
+            pagination.appendChild(btn);
+        }
+    }
+
+    loadData();
 </script>
 
 </body>
