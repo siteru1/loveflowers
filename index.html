@@ -1,150 +1,181 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lovely Flowers</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --pink: #ffb6c1;
-        --white: #ffffff;
-        --dark-pink: #ff69b4;
-        --gray: #f8f8f8;
-        --text-dark: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovely Flowers | Магазин</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #ffb6c1;
+            --white: #ffffff;
+            --dark-pink: #ff69b4;
+            --gray: #f8f8f8;
+            --text-dark: #333;
+        }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        margin: 0;
-        background: var(--white);
-        color: var(--text-dark);
-        overflow-x: hidden;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: var(--white);
+            color: var(--text-dark);
+        }
 
-    header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        background: var(--pink);
-        position: sticky;
-        top: 0;
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--white);
-    }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: var(--pink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-    .container { padding: 40px 5%; }
+        .container { padding: 40px 5%; min-height: 80vh; }
 
-    .shop-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 30px;
-    }
+        h2 { text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
 
-    .product-card {
-        background: var(--gray);
-        text-align: center;
-        border-radius: 12px;
-        padding: 15px;
-        transition: 0.3s;
-        cursor: pointer;
-    }
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
 
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
+        .product-card {
+            background: var(--gray);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
-    .img-box {
-        aspect-ratio: 3/4;
-        overflow: hidden;
-        border-radius: 8px;
-        margin-bottom: 15px;
-    }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
 
-    .img-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 8px;
-    }
+        .img-box {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #eee;
+            margin-bottom: 15px;
+        }
 
-    .product-price {
-        font-weight: 700;
-        font-size: 18px;
-        margin: 10px 0;
-    }
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .btn-pink {
-        display: inline-block;
-        background: var(--dark-pink);
-        color: var(--white);
-        border: none;
-        padding: 12px 20px;
-        font-size: 14px;
-        font-weight: 600;
-        border-radius: 8px;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: 0.3s;
-    }
+        .product-name { font-size: 1.2rem; margin: 10px 0; font-weight: 600; }
 
-    .btn-pink:hover {
-        background: #ff1493;
-    }
+        .product-price {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+        }
 
-    @media (max-width: 768px) {
-        .shop-grid { grid-template-columns: 1fr; }
-    }
-</style>
+        .btn-buy {
+            background: var(--dark-pink);
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover { background: #e0529c; }
+
+        .loader { text-align: center; font-size: 18px; color: #888; margin-top: 50px; }
+
+        @media (max-width: 600px) {
+            .shop-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
 <header>Lovely Flowers</header>
 
-<div class="container" id="shop">
-    <h2 style="text-align:center; margin-bottom:40px; text-transform:uppercase;">Новая коллекция</h2>
-    <div class="shop-grid" id="grid">
-        <!-- Товары из таблицы появятся здесь -->
+<div class="container">
+    <h2>Нова колекція</h2>
+    <div id="shop-container">
+        <div class="loader" id="loader">Завантаження квітів...</div>
+        <div class="shop-grid" id="grid"></div>
     </div>
 </div>
 
 <script>
-    const API = "https://script.google.com/macros/s/AKfycbyzRpoKnVkjPBzbQp0ebi8Khbu9kBbRAg8G-CNxflnxy-gkCbdV6ktR-OQeJ78Qyr9A/exec";
+    // ПРАВИЛЬНЕ ПОСИЛАННЯ (замініть на своє)
+    const API_URL = "https://script.google.com/macros/s/AKfycbz9RQbnCpWBW8RSKnMI8pZk6CsoqO3OWqe2ut_8tepEEUj939aeL2IfrTKUGGlcVbK2/exec";
 
-    async function load() {
+    async function loadProducts() {
+        const grid = document.getElementById('grid');
+        const loader = document.getElementById('loader');
+
         try {
-            const res = await fetch(API);
-            const products = await res.json();
-            render(products);
-        } catch (err) {
-            console.error("Ошибка загрузки данных:", err);
-            document.getElementById('grid').innerHTML = "<p style='text-align:center; color:red;'>Не удалось загрузить товары.</p>";
+            // mode: 'cors' та redirect: 'follow' виправляють більшість помилок з Google
+            const response = await fetch(API_URL, {
+                method: 'GET',
+                redirect: 'follow'
+            });
+
+            if (!response.ok) throw new Error("Не вдалося отримати дані");
+
+            const data = await response.json();
+            
+            loader.style.display = 'none';
+            render(data);
+
+        } catch (error) {
+            console.error("Помилка:", error);
+            loader.innerHTML = `<p style="color:red;">Помилка завантаження. Переконайтеся, що ви використовуєте Live Server або хостинг (не відкривайте файл просто з папки).</p>`;
         }
     }
 
     function render(products) {
-        document.getElementById('grid').innerHTML = products.map(p => `
+        const grid = document.getElementById('grid');
+        
+        if (!products || products.length === 0) {
+            grid.innerHTML = "<p>Товари тимчасово відсутні.</p>";
+            return;
+        }
+
+        grid.innerHTML = products.map(item => `
             <div class="product-card">
-                <div class="img-box"><img src="${p['Фото URL']}" alt="${p.Назва}"></div>
-                <h3>${p.Назва}</h3>
-                <div class="product-price">${p.Ціна} ₽</div>
-                <a href="https://t.me/love_Flawers_menedger" class="btn-pink" target="_blank">Купить</a>
+                <div>
+                    <div class="img-box">
+                        <img src="${item['Фото URL'] || 'https://via.placeholder.com/300'}" alt="${item['Назва']}">
+                    </div>
+                    <div class="product-name">${item['Назва'] || 'Без назви'}</div>
+                </div>
+                <div>
+                    <div class="product-price">${item['Ціна'] || 0} ₽</div>
+                    <a href="https://t.me/love_Flawers_menedger" class="btn-buy" target="_blank">Купити</a>
+                </div>
             </div>
         `).join('');
     }
 
-    load();
+    // Запуск при завантаженні сторінки
+    window.onload = loadProducts;
 </script>
 
 </body>
 </html>
-
-
-
-
 
 
 
